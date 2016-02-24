@@ -89,13 +89,8 @@ def label(xy, text, xy_off=[0, 4]):
 
 if __name__ == '__main__':
 
-    size = 24
     fc_unit_size = 2
-    num = 64
     layer_width = 40
-    top_left = np.array([0, 0])
-    loc_diff = np.array([3, -3])
-
 
     patches = []
     colors = []
@@ -105,7 +100,7 @@ if __name__ == '__main__':
 
     ############################
     # conv layers
-    size_list = [28, 24, 12, 8, 4]
+    size_list = [32, 18, 10, 6, 4]
     num_list = [3, 32, 32, 48, 48]
     x_diff_list = [0, layer_width, layer_width, layer_width, layer_width]
     text_list = ['Inputs'] + ['Feature\nmaps'] * (len(size_list) - 1)
