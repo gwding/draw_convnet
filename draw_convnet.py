@@ -120,7 +120,7 @@ if __name__ == '__main__':
     text_list = ['Inputs'] + ['Feature\nmaps'] * (len(size_list) - 1)
     loc_diff_list = [[3, -3]] * len(size_list)
 
-    num_show_list = map(min, num_list, [NumConvMax] * len(num_list))
+    num_show_list = list(map(min, num_list, [NumConvMax] * len(num_list)))
     top_left_list = np.c_[np.cumsum(x_diff_list), np.zeros(len(x_diff_list))]
 
     for ind in range(len(size_list)):
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     # fully connected layers
     size_list = [fc_unit_size, fc_unit_size, fc_unit_size]
     num_list = [768, 500, 2]
-    num_show_list = map(min, num_list, [NumFcMax] * len(num_list))
+    num_show_list = list(map(min, num_list, [NumFcMax] * len(num_list)))
     x_diff_list = [sum(x_diff_list) + layer_width, layer_width, layer_width]
     top_left_list = np.c_[np.cumsum(x_diff_list), np.zeros(len(x_diff_list))]
     loc_diff_list = [[fc_unit_size, -fc_unit_size]] * len(top_left_list)
