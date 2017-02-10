@@ -57,7 +57,7 @@ def add_layer(patches, colors, size=24, num=5,
     loc_diff = np.array(loc_diff)
     loc_start = top_left - np.array([0, size])
     for ind in range(num):
-        patches.append(Rectangle(loc_start + ind * loc_diff, size, size))
+        patches.append(Rectangle(loc_start + ind * loc_diff, 1, size))
         if ind % 2:
             colors.append(Medium)
         else:
@@ -115,8 +115,11 @@ if __name__ == '__main__':
     ############################
     # conv layers
     size_list = [32, 18, 10, 6, 4]
-    num_list = [3, 32, 32, 48, 48]
-    x_diff_list = [0, layer_width, layer_width, layer_width, layer_width]
+    num_list = [2, 8, 8, 16, 16]
+    # num_list = [3, 32, 32, 48, 48]
+    # x_diff_list = [0, layer_width, layer_width, layer_width, layer_width]
+    x_diff_list = [layer_width for i in range(len(num_list))]
+    x_diff_list[0] = 0 
     text_list = ['Inputs'] + ['Feature\nmaps'] * (len(size_list) - 1)
     loc_diff_list = [[3, -3]] * len(size_list)
 
