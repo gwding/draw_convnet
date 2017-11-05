@@ -7,7 +7,8 @@ Python script for illustrating Convolutional Neural Network (ConvNet)
 
 ## Known issues
 The issue with matplotlib 2.0.x has been resolved, please let me know if you encounter problems.
-~~`Line2D` doesn't seem to work well under `python3 + matplotlib 2.0.0` as pointed out by @ahoereth ~~
+
+~~`Line2D` doesn't seem to work well under `python3 + matplotlib 2.0.0` as pointed out by @ahoereth~~
 
 ## Using the code
 It is NOT required to cite anything to use the code.
