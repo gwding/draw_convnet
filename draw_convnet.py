@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016, Gavin Weiguang Ding
+Copyright (c) 2017, Gavin Weiguang Ding
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,6 @@ import matplotlib.pyplot as plt
 plt.rcdefaults()
 from matplotlib.lines import Line2D
 from matplotlib.patches import Rectangle
-from matplotlib.collections import PatchCollection
 
 
 NumConvMax = 8
@@ -45,6 +44,7 @@ White = 1.
 Light = 0.7
 Medium = 0.5
 Dark = 0.3
+Darker = 0.15
 Black = 0.
 
 
@@ -84,16 +84,17 @@ def add_mapping(patches, colors, start_ratio, patch_size, ind_bgn,
     colors.append(Dark)
     patches.append(Line2D([start_loc[0], end_loc[0]],
                           [start_loc[1], end_loc[1]]))
-    colors.append(Black)
+    colors.append(Darker)
     patches.append(Line2D([start_loc[0] + patch_size, end_loc[0]],
                           [start_loc[1], end_loc[1]]))
-    colors.append(Black)
+    colors.append(Darker)
     patches.append(Line2D([start_loc[0], end_loc[0]],
                           [start_loc[1] + patch_size, end_loc[1]]))
-    colors.append(Black)
+    colors.append(Darker)
     patches.append(Line2D([start_loc[0] + patch_size, end_loc[0]],
                           [start_loc[1] + patch_size, end_loc[1]]))
-    colors.append(Black)
+    colors.append(Darker)
+
 
 
 def label(xy, text, xy_off=[0, 4]):
@@ -168,10 +169,14 @@ if __name__ == '__main__':
         label(top_left_list[ind], text_list[ind], xy_off=[-10, -65])
 
     ############################
-    colors += [0, 1]
-    collection = PatchCollection(patches, cmap=plt.cm.gray)
-    collection.set_array(np.array(colors))
-    ax.add_collection(collection)
+    for patch, color in zip(patches, colors):
+        patch.set_color(color * np.ones(3))
+        if isinstance(patch, Line2D):
+            ax.add_line(patch)
+        else:
+            patch.set_edgecolor(Black * np.ones(3))
+            ax.add_patch(patch)
+
     plt.tight_layout()
     plt.axis('equal')
     plt.axis('off')
