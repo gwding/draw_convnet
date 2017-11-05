@@ -6,14 +6,8 @@ Python script for illustrating Convolutional Neural Network (ConvNet)
 ![](https://raw.githubusercontent.com/gwding/draw_convnet/master/convnet_fig.png)
 
 ## Known issues
-`Line2D` doesn't seem to work well under `python3 + matplotlib 2.0.0` as pointed out by @ahoereth 
-
-The solution is to use follow these instructions.
-```
-$ python3 -m venv .venv
-$ source .venv/bin/activate
-$ pip install -r requirements_python3.txt
-```
+The issue with matplotlib 2.0.x has been resolved, please let me know if you encounter problems.
+~~`Line2D` doesn't seem to work well under `python3 + matplotlib 2.0.0` as pointed out by @ahoereth ~~
 
 ## Using the code
 It is NOT required to cite anything to use the code.
