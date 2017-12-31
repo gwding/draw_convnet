@@ -36,8 +36,9 @@ import matplotlib.pyplot as plt
 plt.rcdefaults()
 from matplotlib.lines import Line2D
 from matplotlib.patches import Rectangle
+from matplotlib.patches import Circle
 
-
+NumDots = 4
 NumConvMax = 8
 NumFcMax = 20
 White = 1.
@@ -59,6 +60,41 @@ def add_layer(patches, colors, size=(24, 24), num=5,
     for ind in range(num):
         patches.append(Rectangle(loc_start + ind * loc_diff, size[1], size[0]))
         if ind % 2:
+            colors.append(Medium)
+        else:
+            colors.append(Light)
+
+
+def add_layer_with_omission(patches, colors, size=(24, 24),
+                            num=5, num_max=8,
+                            num_dots=4,
+                            top_left=[0, 0],
+                            loc_diff=[3, -3],
+                            ):
+    # add a rectangle
+    top_left = np.array(top_left)
+    loc_diff = np.array(loc_diff)
+    loc_start = top_left - np.array([0, size[0]])
+    this_num = min(num, num_max)
+    start_omit = (this_num - num_dots) // 2
+    end_omit = this_num - start_omit
+    start_omit -= 1
+    for ind in range(this_num):
+        if (num > num_max) and (start_omit < ind < end_omit):
+            omit = True
+        else:
+            omit = False
+
+        if omit:
+            patches.append(
+                Circle(loc_start + ind * loc_diff + np.array(size) / 2, 0.5))
+        else:
+            patches.append(Rectangle(loc_start + ind * loc_diff,
+                                     size[1], size[0]))
+
+        if omit:
+            colors.append(Black)
+        elif ind % 2:
             colors.append(Medium)
         else:
             colors.append(Light)
@@ -109,6 +145,7 @@ if __name__ == '__main__':
 
     fc_unit_size = 2
     layer_width = 40
+    flag_omit = True
 
     patches = []
     colors = []
@@ -128,9 +165,17 @@ if __name__ == '__main__':
     top_left_list = np.c_[np.cumsum(x_diff_list), np.zeros(len(x_diff_list))]
 
     for ind in range(len(size_list)):
-        add_layer(patches, colors, size=size_list[ind],
-                  num=num_show_list[ind],
-                  top_left=top_left_list[ind], loc_diff=loc_diff_list[ind])
+        if flag_omit:
+            add_layer_with_omission(patches, colors, size=size_list[ind],
+                                    num=num_list[ind],
+                                    num_max=NumConvMax,
+                                    num_dots=NumDots,
+                                    top_left=top_left_list[ind],
+                                    loc_diff=loc_diff_list[ind])
+        else:
+            add_layer(patches, colors, size=size_list[ind],
+                      num=num_show_list[ind],
+                      top_left=top_left_list[ind], loc_diff=loc_diff_list[ind])
         label(top_left_list[ind], text_list[ind] + '\n{}@{}x{}'.format(
             num_list[ind], size_list[ind][0], size_list[ind][1]))
 
@@ -163,8 +208,18 @@ if __name__ == '__main__':
     text_list = ['Hidden\nunits'] * (len(size_list) - 1) + ['Outputs']
 
     for ind in range(len(size_list)):
-        add_layer(patches, colors, size=size_list[ind], num=num_show_list[ind],
-                  top_left=top_left_list[ind], loc_diff=loc_diff_list[ind])
+        if flag_omit:
+            add_layer_with_omission(patches, colors, size=size_list[ind],
+                                    num=num_list[ind],
+                                    num_max=NumFcMax,
+                                    num_dots=NumDots,
+                                    top_left=top_left_list[ind],
+                                    loc_diff=loc_diff_list[ind])
+        else:
+            add_layer(patches, colors, size=size_list[ind],
+                      num=num_show_list[ind],
+                      top_left=top_left_list[ind],
+                      loc_diff=loc_diff_list[ind])
         label(top_left_list[ind], text_list[ind] + '\n{}'.format(
             num_list[ind]))
 
