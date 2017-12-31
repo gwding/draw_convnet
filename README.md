@@ -7,7 +7,7 @@ With `flag_omit=False`
 ![](https://raw.githubusercontent.com/gwding/draw_convnet/master/convnet_fig.png)
 
 With `flag_omit=True`
-![](https://raw.githubusercontent.com/gwding/draw_convnet/master/convnet_fig_with_omitted_channel.png)
+![](https://raw.githubusercontent.com/gwding/draw_convnet/ccaa14e2f8e41580bd29b97a501f7a4218779356/convnet_fig_with_omitted_channel.png)
 
 
 ## Known issues
