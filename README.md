@@ -3,7 +3,12 @@
 Python script for illustrating Convolutional Neural Network (ConvNet)
 
 ## Example image
+With `flag_omit=False`
 ![](https://raw.githubusercontent.com/gwding/draw_convnet/master/convnet_fig.png)
+
+With `flag_omit=True`
+![](https://raw.githubusercontent.com/gwding/draw_convnet/master/convnet_fig_with_omitted_channel.png)
+
 
 ## Known issues
 The issue with matplotlib 2.0.x has been resolved, please let me know if you encounter problems.
