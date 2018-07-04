@@ -164,7 +164,7 @@ if __name__ == '__main__':
     num_show_list = list(map(min, num_list, [NumConvMax] * len(num_list)))
     top_left_list = np.c_[np.cumsum(x_diff_list), np.zeros(len(x_diff_list))]
 
-    for ind in range(len(size_list)):
+    for ind in range(len(size_list)-1,-1,-1):
         if flag_omit:
             add_layer_with_omission(patches, colors, size=size_list[ind],
                                     num=num_list[ind],
